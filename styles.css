@@ -1,0 +1,15 @@
+body,
+html,
+.container {
+    background-color: black;
+    color: red;
+}
+
+input,
+button {
+    width: 240px;
+}
+
+.tabela {
+    color: black;
+}
