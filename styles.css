@@ -18,3 +18,7 @@ button {
     background-color: rgb(92, 0, 0);
 }
 
+table{
+    border: 2px solid red;
+  border-collapse: collapse;
+}
