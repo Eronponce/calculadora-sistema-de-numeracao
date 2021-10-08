@@ -11,5 +11,10 @@ button {
 }
 
 .tabela {
-    color: black;
+    color: rgb(255, 255, 255);
+    background-color: rgb(37, 37, 37);
 }
+.resto{
+    background-color: rgb(92, 0, 0);
+}
+
