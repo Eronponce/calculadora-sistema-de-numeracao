@@ -1,24 +1,24 @@
 body,
 html,
 .container {
-    background-color: black;
-    color: red;
+  background-color: black;
+  color: red;
 }
 
 input,
 button {
-    width: 240px;
+  width: 240px;
 }
 
 .tabela {
-    color: rgb(255, 255, 255);
-    background-color: rgb(37, 37, 37);
+  color: rgb(255, 255, 255);
+  background-color: rgb(37, 37, 37);
 }
-.resto{
-    background-color: rgb(92, 0, 0);
+.resto {
+  background-color: rgb(92, 0, 0);
 }
 
-table{
-    border: 2px solid red;
+table {
+  border: 2px solid red;
   border-collapse: collapse;
 }
