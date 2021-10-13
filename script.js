@@ -67,6 +67,7 @@ function convertaDecimal() {
 function convertaBinario() {
     limpaTabelas();
     binarioParaDecimal();
+    binarioParaOctal()
 }
 
 /**     
@@ -321,7 +322,6 @@ function binarioParaDecimal() {
     //inverte o array de 0 e 1 para fazer a conta
     var valorBinarioReverso = Array.from(valorBinario);
     valorBinarioReverso.reverse();
-    console.log(valorBinarioReverso)
 
     //explica como sera feito a tradução
     var explicacaoDecimal = document.getElementById("explicacaoDecimal");
@@ -352,4 +352,51 @@ function binarioParaDecimal() {
         }
     }
     setDecimal(valorDecimal);
+}
+
+/**
+  Método para transformar números binários para octais
+    @param recebe os valores nos html existentes
+
+    @return os valores tratados do binário para octal, com a explicação de cada 3 elementos em uma linha própria
+ */
+function binarioParaOctal() {
+    var i = 0
+    var arrayOctal = new Array();
+    var valorBinario = getBinario();
+
+    //inverte o array de 0 e 1 para fazer a conta
+    var valorBinarioReverso = Array.from(valorBinario);
+    valorBinarioReverso.reverse();
+
+    //explica como sera feito a tradução
+    var explicacaoOctal = document.getElementById("explicacaoOctal");
+    var explicacao = document.createElement("p");
+    var explicacaoString = document.createTextNode(
+        "<--------------------------------- Para traduzir para um numero Binario para octal é nescessário que selecione os numeros binário em trios em ordem da esquerda para direita e traduza-os para depois junta-los"
+    );
+    explicacao.appendChild(explicacaoString);
+    explicacaoOctal.appendChild(explicacao);
+
+    //metodo para traduzir
+    for (var j = 0; j < ((valorBinarioReverso.length / 3).toFixed(2)); j++) {
+        var valorOctal = 0;
+        var arrayExplicacaoOctal = new Array();
+        while (i < i + 3) {
+
+            if (valorBinarioReverso[i] == 1) {
+                valorOctal += (2 ** i);
+            }
+            i++
+            arrayExplicacaoOctal.push(valorBinarioReverso[i]);
+
+        }
+        arrayOctal.push(valorOctal);
+        var explicacaoOctal = document.getElementById("explicacaoOctal");
+        var explicacao = document.createElement("p");
+        var explicacaoString = document.createTextNode((j + 1) + "° valor de" + arrayExplicaçãoOctal + "é equivalente a " + valorOctal);
+        explicacao.appendChild(explicacaoString);
+        explicacaoOctal.appendChild(explicacao);
+    }
+    setOctal(arrayOctal.reverse().join(""));
 }
