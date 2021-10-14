@@ -88,6 +88,7 @@ function convertaBinario() {
 function convertaOctal() {
   limpaTabelas();
   octalParaBinario();
+  octalParaDecimal();
 }
 
 /**     
@@ -510,24 +511,73 @@ function octalParaBinario() {
   explicacao.appendChild(explicacaoString);
   explicacaoBinaria.appendChild(explicacao);
 
+  //atribuiçao de um portão lógico que sera liberado ao acabar o tratamento da variável
   var proposicao = true;
   while (proposicao) {
+    // retirada de 1 dos valores octais da string
     var valorPrimeiroOctal = valorOctal.slice(0, 1);
     valorOctal = valorOctal.substring(1);
-    valorBinario = parseInt(valorPrimeiroOctal, 8).toString(2).padStart(3,"0");
+    // tratamento do valor para decimal, depois para binario, e o preenchimento de ate 3 caracteres anteriores com 0
+    valorBinario = parseInt(valorPrimeiroOctal, 8).toString(2).padStart(3, "0");
     arrayBinario.push(valorBinario);
 
+    // explicaçao do elemento referente e como foi o tratamento
     var explicacaoBinaria = document.getElementById("explicacaoBinaria");
     var explicacao = document.createElement("p");
     var explicacaoString = document.createTextNode(valorPrimeiroOctal + " = " + valorBinario);
     explicacao.appendChild(explicacaoString);
     explicacaoBinaria.appendChild(explicacao);
-
-
+    //verificaçao do portão lógico
     if (valorOctal == "") {
       proposicao = false;
     }
   }
+  //atribuição do valor binário no html
   setBinario(arrayBinario.join(""));
+}
+
+/** 
+  Método para transformar números octais para decimais
+    @param recebe os valores nos html existentes
+
+    @return os valores decimais tratados a cada valor respectivo octal
+*/
+function octalParaDecimal() {
+  var valorOctal = getOctal();
+  var valorDecimalFinal = 0;
+  //explica como sera feito a tradução
+  var explicacaoDecimal = document.getElementById("explicacaoDecimal");
+  var explicacao = document.createElement("p");
+  var explicacaoString = document.createTextNode(
+    "Para traduzir um elemento octal para decimal é nescessário que se faça o próprio numero vezes 8 elevado a sua posição inversa");
+  explicacao.appendChild(explicacaoString);
+  explicacaoDecimal.appendChild(explicacao);
+
+  //atribuiçao de um portão lógico que sera liberado ao acabar o tratamento da variável
+  var proposicao = true;
+  var i = 0
+  // inversao da string 
+  valorOctal = reverseString(valorOctal)
+  while (proposicao) {
+    //retirada de 1 dos valores octais da string
+    var valorPrimeiroOctal = valorOctal.slice(0, 1);
+    valorOctal = valorOctal.substring(1);
+    // tratamento do valor para decimal
+    var valorDecimal = (valorPrimeiroOctal * (8 ** i));
+    valorDecimalFinal += valorDecimal
+    // explicaçao de como foi feito o tratamento e amostragem no html
+    var explicacaoDecimal = document.getElementById("explicacaoDecimal");
+    var explicacao = document.createElement("p");
+    var explicacaoString = document.createTextNode((i + 1) + "° valor sendo '" + valorPrimeiroOctal + "' vezes 8^" + i + " é = " + valorDecimal);
+    explicacao.appendChild(explicacaoString);
+    explicacaoDecimal.appendChild(explicacao);
+    i++;
+    //verificaçao do portão lógico
+    if (valorOctal == "") {
+      proposicao = false;
+    }
+  }
+  // atribuiçao decimal do valor no html
+  setDecimal(valorDecimalFinal)
 }
 
