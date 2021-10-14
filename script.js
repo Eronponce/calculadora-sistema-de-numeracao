@@ -89,6 +89,7 @@ function convertaOctal() {
   limpaTabelas();
   octalParaBinario();
   octalParaDecimal();
+  octalParaHexadecimal()
 }
 
 /**     
@@ -499,8 +500,8 @@ function binarioParaHexadecimal() {
     @return os valores binarios tratados a cada valor respectivo octal
 */
 function octalParaBinario() {
-  valorOctal = getOctal();
-  arrayBinario = new Array();
+  var valorOctal = getOctal();
+  var arrayBinario = new Array();
 
   //explica como sera feito a tradução
   var explicacaoBinaria = document.getElementById("explicacaoBinaria");
@@ -579,5 +580,71 @@ function octalParaDecimal() {
   }
   // atribuiçao decimal do valor no html
   setDecimal(valorDecimalFinal)
+}
+
+function octalParaHexadecimal() {
+  var valorOctal = getOctal();
+  var valorBinario = "";
+  var valorHexadecimal = "";
+  var arrayHexadecimal = new Array();
+
+
+  var explicacaoHexadecimal = document.getElementById("explicacaoHexadecimal");
+  var explicacao = document.createElement("p");
+  var explicacaoString = document.createTextNode("Para traduzir um numero octal é nescessárioo que se transforme primeiro em binário");
+  explicacao.appendChild(explicacaoString);
+  explicacaoHexadecimal.appendChild(explicacao);
+
+  for (var i = 0; i < valorOctal.length; i++) {
+    var valorOctalTemporario = parseInt(valorOctal[i], 8).toString(2).padStart(3, "0");
+    valorBinario += (valorOctalTemporario);
+
+    var explicacaoHexadecimal = document.getElementById("explicacaoHexadecimal");
+    var explicacao = document.createElement("p");
+    var explicacaoString = document.createTextNode(valorOctal[i] + "= " + valorOctalTemporario);
+    explicacao.appendChild(explicacaoString);
+    explicacaoHexadecimal.appendChild(explicacao);
+  }
+
+  var explicacaoHexadecimal = document.getElementById("explicacaoHexadecimal");
+  var explicacao = document.createElement("p");
+  var explicacaoString = document.createTextNode("Com o número binário " + valorBinario + " é necessário que pegue de 4 em 4 e transforme em hexadecimal");
+  explicacao.appendChild(explicacaoString);
+  explicacaoHexadecimal.appendChild(explicacao);
+
+  var valorBinarioInverso = reverseString(valorBinario);
+  var proposicao = true;
+  while (proposicao) {
+
+    var valorBinarioInversoQuarteto = valorBinarioInverso.slice(0, 4);
+    valorBinarioInverso = valorBinarioInverso.substring(4);
+    valorBinarioQuarteto = reverseString(valorBinarioInversoQuarteto);
+    var valorHexadecimal = parseInt(valorBinarioQuarteto, 2);
+    if (valorHexadecimal == 10) {
+      valorHexadecimal = "A";
+    } else if (valorHexadecimal == 11) {
+      valorHexadecimal = "B";
+    } else if (valorHexadecimal == 12) {
+      valorHexadecimal = "C";
+    } else if (valorHexadecimal == 13) {
+      valorHexadecimal = "D";
+    } else if (valorHexadecimal == 14) {
+      valorHexadecimal = "E";
+    } else if (valorHexadecimal == 15) {
+      valorHexadecimal = "F";
+    }
+    arrayHexadecimal.push(valorHexadecimal);
+
+    var explicacaoHexadecimal = document.getElementById("explicacaoHexadecimal");
+    var explicacao = document.createElement("p");
+    var explicacaoString = document.createTextNode(valorBinarioQuarteto + " = " + valorHexadecimal);
+    explicacao.appendChild(explicacaoString);
+    explicacaoHexadecimal.appendChild(explicacao);
+    if (valorBinarioInverso == "") {
+      proposicao = false;
+    }
+  }
+
+  setHexadecimal(arrayHexadecimal.reverse().join(""));
 }
 
