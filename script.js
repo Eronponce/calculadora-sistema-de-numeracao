@@ -85,6 +85,11 @@ function convertaBinario() {
   binarioParaHexadecimal();
 }
 
+function convertaOctal() {
+  limpaTabelas();
+  octalParaBinario();
+}
+
 /**     
     Método para transformar números decimais para Binário
     @param recebe os valores nos html existentes
@@ -327,51 +332,6 @@ function decimalParaHexadecimal() {
 }
 
 /**
-  Método para transformar números binários para decimais
-    @param recebe os valores nos html existentes
-
-    @return os valores tratados do binario para decimal, com a explicação de cada elemento em uma linha própria
- */
-function binarioParaDecimal() {
-  var valorDecimal = 0;
-  var valorBinario = getBinario();
-
-  //inverte o array de 0 e 1 para fazer a conta
-  var valorBinarioReverso = Array.from(valorBinario);
-  valorBinarioReverso.reverse();
-
-  //explica como sera feito a tradução
-  var explicacaoDecimal = document.getElementById("explicacaoDecimal");
-  var explicacao = document.createElement("p");
-  var explicacaoString = document.createTextNode(
-    "<--------------------------------- Para traduzir para um numero Binario para decimal é nescessário que selecione os numeros na ordem contraria e caso seja 1, eleve a sua posição e os some"
-  );
-  explicacao.appendChild(explicacaoString);
-  explicacaoDecimal.appendChild(explicacao);
-
-  //metodo para traduzir
-  for (var i = 0; i < valorBinarioReverso.length; i++) {
-    if (valorBinarioReverso[i] == 1) {
-      valorDecimal += 2 ** i;
-      // explicação da tradução caso seja 1
-      var explicacaoHexadecimal = document.getElementById("explicacaoHexadecimal");
-      var explicacao = document.createElement("p");
-      var explicacaoString = document.createTextNode((i + 1) + "° valor, é 2 elevado a " + i + " = " + (2 ** i));
-      explicacao.appendChild(explicacaoString);
-      explicacaoDecimal.appendChild(explicacao);
-    } else {
-      // explicação da tradução caso seja 0
-      var explicacaoHexadecimal = document.getElementById("explicacaoHexadecimal");
-      var explicacao = document.createElement("p");
-      var explicacaoString = document.createTextNode((i + 1) + "° valor é 0 entao não sera somado");
-      explicacao.appendChild(explicacaoString);
-      explicacaoDecimal.appendChild(explicacao);
-    }
-  }
-  setDecimal(valorDecimal);
-}
-
-/**
   Método para transformar números binários para octais
     @param recebe os valores nos html existentes
 
@@ -423,6 +383,51 @@ function binarioParaOctal() {
 }
 
 /**
+  Método para transformar números binários para decimais
+    @param recebe os valores nos html existentes
+
+    @return os valores tratados do binario para decimal, com a explicação de cada elemento em uma linha própria
+ */
+function binarioParaDecimal() {
+  var valorDecimal = 0;
+  var valorBinario = getBinario();
+
+  //inverte o array de 0 e 1 para fazer a conta
+  var valorBinarioReverso = Array.from(valorBinario);
+  valorBinarioReverso.reverse();
+
+  //explica como sera feito a tradução
+  var explicacaoDecimal = document.getElementById("explicacaoDecimal");
+  var explicacao = document.createElement("p");
+  var explicacaoString = document.createTextNode(
+    "Para traduzir para um numero Binario para decimal é nescessário que selecione os numeros na ordem contraria e caso seja 1, eleve a sua posição e os some"
+  );
+  explicacao.appendChild(explicacaoString);
+  explicacaoDecimal.appendChild(explicacao);
+
+  //metodo para traduzir
+  for (var i = 0; i < valorBinarioReverso.length; i++) {
+    if (valorBinarioReverso[i] == 1) {
+      valorDecimal += 2 ** i;
+      // explicação da tradução caso seja 1
+      var explicacaoHexadecimal = document.getElementById("explicacaoHexadecimal");
+      var explicacao = document.createElement("p");
+      var explicacaoString = document.createTextNode((i + 1) + "° valor, é 2 elevado a " + i + " = " + (2 ** i));
+      explicacao.appendChild(explicacaoString);
+      explicacaoDecimal.appendChild(explicacao);
+    } else {
+      // explicação da tradução caso seja 0
+      var explicacaoHexadecimal = document.getElementById("explicacaoHexadecimal");
+      var explicacao = document.createElement("p");
+      var explicacaoString = document.createTextNode((i + 1) + "° valor é 0 entao não sera somado");
+      explicacao.appendChild(explicacaoString);
+      explicacaoDecimal.appendChild(explicacao);
+    }
+  }
+  setDecimal(valorDecimal);
+}
+
+/**
   Método para transformar números binários para Hexadecimais
     @param recebe os valores nos html existentes
 
@@ -439,7 +444,7 @@ function binarioParaHexadecimal() {
   var explicacaoHexadecimal = document.getElementById("explicacaoHexadecimal");
   var explicacao = document.createElement("p");
   var explicacaoString = document.createTextNode(
-    "<--------------------------------- Para traduzir para um numero Binario para Hexadecimal é nescessário que selecione os numeros binário em quartetos em ordem da esquerda para direita e traduza-os para depois junta-los"
+    "Para traduzir para um numero Binario para Hexadecimal é nescessário que selecione os numeros binário em quartetos em ordem da esquerda para direita e traduza-os para depois junta-los"
   );
   explicacao.appendChild(explicacaoString);
   explicacaoHexadecimal.appendChild(explicacao);
@@ -484,5 +489,45 @@ function binarioParaHexadecimal() {
   }
   //atribuiçao do valor Hexadecimal no html
   setHexadecimal(arrayHexadecimal.reverse().join(""));
+}
+
+/** 
+  Método para transformar números octais para binários
+    @param recebe os valores nos html existentes
+
+    @return os valores binarios tratados a cada valor respectivo octal
+*/
+function octalParaBinario() {
+  valorOctal = getOctal();
+  arrayBinario = new Array();
+
+  //explica como sera feito a tradução
+  var explicacaoBinaria = document.getElementById("explicacaoBinaria");
+  var explicacao = document.createElement("p");
+  var explicacaoString = document.createTextNode(
+    "Para traduzir para um numero Octal para Binario é nescessário que se pegue cada elemento na ordem de esquerda para direita e traduza=os para binario, para depois junta-los"
+  );
+  explicacao.appendChild(explicacaoString);
+  explicacaoBinaria.appendChild(explicacao);
+
+  var proposicao = true;
+  while (proposicao) {
+    var valorPrimeiroOctal = valorOctal.slice(0, 1);
+    valorOctal = valorOctal.substring(1);
+    valorBinario = parseInt(valorPrimeiroOctal, 8).toString(2).padStart(3,"0");
+    arrayBinario.push(valorBinario);
+
+    var explicacaoBinaria = document.getElementById("explicacaoBinaria");
+    var explicacao = document.createElement("p");
+    var explicacaoString = document.createTextNode(valorPrimeiroOctal + " = " + valorBinario);
+    explicacao.appendChild(explicacaoString);
+    explicacaoBinaria.appendChild(explicacao);
+
+
+    if (valorOctal == "") {
+      proposicao = false;
+    }
+  }
+  setBinario(arrayBinario.join(""));
 }
 
