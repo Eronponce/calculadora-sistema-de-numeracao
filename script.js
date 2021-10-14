@@ -82,6 +82,7 @@ function convertaBinario() {
   limpaTabelas();
   binarioParaDecimal();
   binarioParaOctal();
+  binarioParaHexadecimal();
 }
 
 /**     
@@ -419,6 +420,69 @@ function binarioParaOctal() {
   }
   //atribuiçao do valor octal no html
   setOctal(arrayOctal.reverse().join(""));
-
-
 }
+
+/**
+  Método para transformar números binários para Hexadecimais
+    @param recebe os valores nos html existentes
+
+    @return os valores tratados do binário para hexadecimais, com a explicação de cada 4 elementos em uma linha própria,
+    com sua respectiva resposta em hexadecimal
+ */
+
+function binarioParaHexadecimal() {
+  var arrayHexadecimal = new Array()
+  var valorBinario = getBinario();
+  var valorBinarioInverso = reverseString(valorBinario);
+
+  //explica como sera feito a tradução
+  var explicacaoHexadecimal = document.getElementById("explicacaoHexadecimal");
+  var explicacao = document.createElement("p");
+  var explicacaoString = document.createTextNode(
+    "<--------------------------------- Para traduzir para um numero Binario para Hexadecimal é nescessário que selecione os numeros binário em quartetos em ordem da esquerda para direita e traduza-os para depois junta-los"
+  );
+  explicacao.appendChild(explicacaoString);
+  explicacaoHexadecimal.appendChild(explicacao);
+
+  //atribuiçao de um portão lógico que sera liberado ao acabar o tratamento da variável
+  var proposicao = true;
+  while (proposicao) {
+
+    // retirada de 4 valores da string dos binarios inversa
+    var valorBinarioQuartetoInverso = valorBinarioInverso.slice(0, 4);
+    valorBinarioInverso = valorBinarioInverso.substring(4);
+    var valorBinarioQuarteto = reverseString(valorBinarioQuartetoInverso);
+
+    // tratamento da base binaria para Hexadecimal por meio do parseInt e a tradução de hexadecimal com o armazenamento do mesmo
+    var valorHexadecimal = parseInt(valorBinarioQuarteto, 2);
+    if (valorHexadecimal == 10) {
+      valorHexadecimal = "A";
+    } else if (valorHexadecimal == 11) {
+      valorHexadecimal = "B";
+    } else if (valorHexadecimal == 12) {
+      valorHexadecimal = "C";
+    } else if (valorHexadecimal == 13) {
+      valorHexadecimal = "D";
+    } else if (valorHexadecimal == 14) {
+      valorHexadecimal = "E";
+    } else if (valorHexadecimal == 15) {
+      valorHexadecimal = "F";
+    }
+    arrayHexadecimal.push(valorHexadecimal);
+
+    // tratamento explicativo de cada segmento
+    var explicacaoHexadecimal = document.getElementById("explicacaoHexadecimal");
+    var explicacao = document.createElement("p");
+    var explicacaoString = document.createTextNode(valorBinarioQuarteto + " = " + valorHexadecimal);
+    explicacao.appendChild(explicacaoString);
+    explicacaoHexadecimal.appendChild(explicacao);
+
+    //verificaçao do portão lógico
+    if (valorBinarioInverso == "") {
+      proposicao = false;
+    }
+  }
+  //atribuiçao do valor Hexadecimal no html
+  setHexadecimal(arrayHexadecimal.reverse().join(""));
+}
+
