@@ -747,9 +747,9 @@ function HexadecimalParaOctal() {
     var arrayOctal = new Array();
     var arrayBinario = arrayBinario.join("");
     var valorBinarioInverso = reverseString(arrayBinario);
-
+    var contador = 0;
     while (proposicaoOctal) {
-        var contador = 0;
+
 
         // retirada de 3 valores da string dos binarios inversa
         var valorBinarioTrioInverso = valorBinarioInverso.slice(0, 3);
@@ -763,7 +763,10 @@ function HexadecimalParaOctal() {
         // tratamento explicativo de cada segmento
         var explicacaoOctal = document.getElementById("explicacaoOctal");
         var explicacao = document.createElement("p");
-        var explicacaoString = document.createTextNode(arrayHexadecimal + " = " + valorBinarioTrio + " = " + valorOctal);
+        if (arrayHexadecimal[contador] == undefined) {
+            arrayHexadecimal[contador] = 'Resto';
+        }
+        var explicacaoString = document.createTextNode(arrayHexadecimal[contador] + " = " + valorBinarioTrio + " = " + valorOctal);
         explicacao.appendChild(explicacaoString);
         explicacaoOctal.appendChild(explicacao);
 
