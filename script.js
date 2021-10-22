@@ -802,13 +802,15 @@ function hexadecimalParaDecimal() {
         // retirada de 1 dos valores hexadecimais da string
         var valorPrimeiroHexadecimal = valorHexadecimal.slice(0, 1);
         valorHexadecimal = valorHexadecimal.substring(1);
+
         // tratamento do valor para decimal, depois somado
         var valorDecimal = parseInt(valorPrimeiroHexadecimal, 16);
         var valorDecimalMultiplicado = (valorDecimal * (16 ** i))
         valorDecimalSomado += valorDecimalMultiplicado;
+
         var explicacaoDecimal = document.getElementById("explicacaoDecimal");
         var explicacao = document.createElement("p");
-        var explicacaoString = document.createTextNode(valorPrimeiroHexadecimal + " * " + "16^" + i + " = " + valorDecimalMultiplicado);
+        var explicacaoString = document.createTextNode(valorPrimeiroHexadecimal + " = " + valorDecimal + " * " + "16^" + i + " = " + valorDecimalMultiplicado);
         explicacao.appendChild(explicacaoString);
         explicacaoDecimal.appendChild(explicacao);
     }
