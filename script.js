@@ -9,7 +9,7 @@ function reverseString(str) {
         return "";
 
     else
-        return reverseString(str.substr(1)) + str.charAt(0);
+        return reverseString(str.substring(1)) + str.charAt(0);
 }
 
 /**
@@ -96,6 +96,7 @@ function convertaHexadecimal() {
     limpaTabelas();
     HexadecimalparaBinario();
     HexadecimalParaOctal()
+    hexadecimalParaDecimal()
 }
 
 /**     
@@ -706,6 +707,12 @@ function HexadecimalparaBinario() {
     setBinario(arrayBinario.join(""));
 }
 
+/** 
+  Método para transformar números Hexadecimais para Octais
+    @param recebe os valores nos html existentes
+
+    @return os valores Hexadecimais traduzidos para binarios e depois para octais
+*/
 function HexadecimalParaOctal() {
     var valorHexadecimal = getHexadecimal();
     var arrayHexadecimal = new Array();
@@ -739,7 +746,6 @@ function HexadecimalParaOctal() {
     var proposicaoOctal = true;
     var arrayOctal = new Array();
     var arrayBinario = arrayBinario.join("");
-    console.log(arrayBinario)
     var valorBinarioInverso = reverseString(arrayBinario);
 
     while (proposicaoOctal) {
@@ -767,6 +773,41 @@ function HexadecimalParaOctal() {
         }
     }
     //atribuição do valor de Octal no html
-    setOctal(arrayOctal.join(""));
+    setOctal(arrayOctal.reverse().join(""));
 
+}
+
+/** 
+  Método para transformar números Hexadecimais para decimais
+    @param recebe os valores nos html existentes
+
+    @return os valores hexadecimais traduzidos para decimais e somados
+*/
+function hexadecimalParaDecimal() {
+    var valorHexadecimal = getHexadecimal();
+    var valorDecimalSomado = 0;
+    var explicacaoDecimal = document.getElementById("explicacaoDecimal");
+    var explicacao = document.createElement("p");
+    var explicacaoString = document.createTextNode(
+        "Para traduzir para um numero hexadecimal para decimal é necessário que ao pegar cada numero pela ordem inversa faça pela potência de sua posição "
+    );
+    explicacao.appendChild(explicacaoString);
+    explicacaoDecimal.appendChild(explicacao);
+    valorHexadecimal = reverseString(valorHexadecimal);
+    for (var i = 0; i <= valorHexadecimal.length; i++) {
+
+        // retirada de 1 dos valores hexadecimais da string
+        var valorPrimeiroHexadecimal = valorHexadecimal.slice(0, 1);
+        valorHexadecimal = valorHexadecimal.substring(1);
+        // tratamento do valor para decimal, depois somado
+        var valorDecimal = parseInt(valorPrimeiroHexadecimal, 16);
+        var valorDecimalMultiplicado = (valorDecimal * (16 ** i))
+        valorDecimalSomado += valorDecimalMultiplicado;
+        var explicacaoDecimal = document.getElementById("explicacaoDecimal");
+        var explicacao = document.createElement("p");
+        var explicacaoString = document.createTextNode(valorPrimeiroHexadecimal + " * " + "16^" + i + " = " + valorDecimalMultiplicado);
+        explicacao.appendChild(explicacaoString);
+        explicacaoDecimal.appendChild(explicacao);
+    }
+    setDecimal(valorDecimalSomado)
 }
