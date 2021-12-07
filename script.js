@@ -108,7 +108,7 @@ function convertaHexadecimal() {
 function decimalParaBinario() {
     var tabelaBinaria = document.getElementById("tabelaBinaria");
     var valorFinal = getDecimal();
-    var contador = 0;
+    var contador = 0;   
     var bits = new Array();
     var temp = "";
     while (valorFinal != 0) {
@@ -498,7 +498,10 @@ function binarioParaHexadecimal() {
         }
     }
     //atribuiçao do valor Hexadecimal no html
-    setHexadecimal(arrayHexadecimal.reverse().join(""));
+    var valorHexadecimalCom0 = arrayHexadecimal.reverse().join("");
+    var valorHexadecimalSem0 = valorHexadecimalCom0.replaceFirst("^0+(?!$)", "");
+    setHexadecimal(valorHexadecimalSem0);
+    
 }
 
 /** 
@@ -542,7 +545,10 @@ function octalParaBinario() {
         }
     }
     //atribuição do valor binário no html
-    setBinario(arrayBinario.join(""));
+    var valorBinarioCom0 = arrayBinario.join("");
+    var valorinarioSem0 = valorBinarioCom0.replaceFirst("^0+(?!$)", "");
+    setHexadecimal(valorinarioSem0);
+    
 }
 
 /** 
@@ -658,7 +664,9 @@ function octalParaHexadecimal() {
             proposicao = false;
         }
     }
-    setHexadecimal(arrayHexadecimal.reverse().join(""));
+    var valorHexadecimalCom0 = arrayHexadecimal.reverse().join("");
+    var valorHexadecimalSem0 = valorHexadecimalCom0.replaceFirst("^0+(?!$)", "");
+    setHexadecimal(valorHexadecimalSem0);
 }
 
 
@@ -704,7 +712,10 @@ function HexadecimalparaBinario() {
         }
     }
     //atribuição do valor binário no html
-    setBinario(arrayBinario.join(""));
+    var valorBinarioCom0 = arrayBinario.join("");
+    var valorinarioSem0 = valorBinarioCom0.replaceFirst("^0+(?!$)", "");
+    setHexadecimal(valorinarioSem0);
+   
 }
 
 /** 
