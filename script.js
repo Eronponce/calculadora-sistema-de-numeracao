@@ -499,7 +499,7 @@ function binarioParaHexadecimal() {
     }
     //atribuiçao do valor Hexadecimal no html
     var valorHexadecimalCom0 = arrayHexadecimal.reverse().join("");
-    var valorHexadecimalSem0 = valorHexadecimalCom0.replaceFirst("^0+(?!$)", "");
+    var valorHexadecimalSem0 = valorHexadecimalCom0.replace("^0+(?!$)", "");
     setHexadecimal(valorHexadecimalSem0);
     
 }
@@ -546,7 +546,7 @@ function octalParaBinario() {
     }
     //atribuição do valor binário no html
     var valorBinarioCom0 = arrayBinario.join("");
-    var valorinarioSem0 = valorBinarioCom0.replaceFirst("^0+(?!$)", "");
+    var valorinarioSem0 = valorBinarioCom0.replace("^0+(?!$)", "");
     setHexadecimal(valorinarioSem0);
     
 }
@@ -665,7 +665,7 @@ function octalParaHexadecimal() {
         }
     }
     var valorHexadecimalCom0 = arrayHexadecimal.reverse().join("");
-    var valorHexadecimalSem0 = valorHexadecimalCom0.replaceFirst("^0+(?!$)", "");
+    var valorHexadecimalSem0 = valorHexadecimalCom0.replace("^0+(?!$)", "");
     setHexadecimal(valorHexadecimalSem0);
 }
 
@@ -713,8 +713,8 @@ function HexadecimalparaBinario() {
     }
     //atribuição do valor binário no html
     var valorBinarioCom0 = arrayBinario.join("");
-    var valorinarioSem0 = valorBinarioCom0.replaceFirst("^0+(?!$)", "");
-    setHexadecimal(valorinarioSem0);
+    var valorinarioSem0 = valorBinarioCom0.replace("^0+(?!$)", "");
+    setBinario(valorinarioSem0);
    
 }
 
@@ -787,7 +787,9 @@ function HexadecimalParaOctal() {
         }
     }
     //atribuição do valor de Octal no html
-    setOctal(arrayOctal.reverse().join(""));
+    var octalCom0 = arrayOctal.reverse().join("")
+    var octalSem0 = octalCom0.replace("^0+(?!$)", "");
+    setOctal(octalSem0);
 
 }
 
