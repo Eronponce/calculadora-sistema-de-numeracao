@@ -810,7 +810,9 @@ function hexadecimalParaDecimal() {
     explicacao.appendChild(explicacaoString);
     explicacaoDecimal.appendChild(explicacao);
     valorHexadecimal = reverseString(valorHexadecimal);
-    for (var i = 0; i <= valorHexadecimal.length; i++) {
+    var tamanhoHexa = valorHexadecimal.length;
+    for (var i = 0; i < tamanhoHexa; i++) {
+    console.log(valorHexadecimal)
 
         // retirada de 1 dos valores hexadecimais da string
         var valorPrimeiroHexadecimal = valorHexadecimal.slice(0, 1);
