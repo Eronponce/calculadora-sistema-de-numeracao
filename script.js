@@ -547,7 +547,7 @@ function octalParaBinario() {
     //atribuição do valor binário no html
     var valorBinarioCom0 = arrayBinario.join("");
     var valorinarioSem0 = valorBinarioCom0.replace("^0+(?!$)", "");
-    setBinario(valorBinarioCom0);
+    setBinario(valorinarioSem0);
     
 }
 
